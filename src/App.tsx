@@ -1,4 +1,4 @@
-import { Button } from "./components/button";
+import { Button } from "./components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +7,7 @@ import {
   PaginationLink,
   PaginationEllipsis,
   PaginationNext
-} from "./components/Pagination";
+} from "./components/ui/Pagination";
 
 function App() {
   return (

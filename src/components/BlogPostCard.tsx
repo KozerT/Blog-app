@@ -1,3 +1,6 @@
-import { readFile } from "fs";
+const BlogPostCard = () => {
+  console.log("first");
+  return <div></div>;
+};
 
-readFile
+export default BlogPostCard;
