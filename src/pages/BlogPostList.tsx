@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import BlogPostCard from "../components/BlogPostCard";
 import { LayoutWrapper } from "../components/LayoutWrapper";
 import {
@@ -11,6 +12,7 @@ import {
 } from "../components/ui/Pagination";
 import { useBlog } from "../context/BlogContext";
 import { usePagination } from "../hooks/usePagination";
+import { BlogPost } from "../types/models";
 
 interface BlogPostListProps {
   postsPerPage?: number;
@@ -20,6 +22,7 @@ export const BlogPostList: React.FC<BlogPostListProps> = ({
   postsPerPage = 6
 }) => {
   const { posts } = useBlog();
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(posts);
   const {
     currentPage,
     totalPages,
@@ -27,9 +30,24 @@ export const BlogPostList: React.FC<BlogPostListProps> = ({
     goToPreviousPage,
     goToPage,
     getVisiblePages
-  } = usePagination(posts.length, postsPerPage);
+  } = usePagination(filteredPosts.length, postsPerPage);
 
-  const paginatedPosts = posts.slice(
+  useEffect(() => {
+    const searchQuery = localStorage.getItem("searchQuery") || "";
+    if (searchQuery) {
+      const lowercasedQuery = searchQuery.toLowerCase();
+      const filtered = posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(lowercasedQuery) ||
+          post.content.toLowerCase().includes(lowercasedQuery)
+      );
+      setFilteredPosts(filtered);
+    } else {
+      setFilteredPosts(posts);
+    }
+  }, [posts]);
+
+  const paginatedPosts = filteredPosts.slice(
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage
   );
@@ -52,7 +70,6 @@ export const BlogPostList: React.FC<BlogPostListProps> = ({
                 disabled={currentPage === 1}
               />
             </PaginationItem>
-            {/* Additional logic for pagination links */}
             {visiblePages[0] > 1 && (
               <>
                 <PaginationItem className="cursor-pointer">
