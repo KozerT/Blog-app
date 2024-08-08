@@ -1,8 +1,7 @@
 export interface BlogPost {
-    id: number;
-    title: string;
-    content: string; 
-    imageUrl?: string;  
-    createdAt: Date;
-  }
-  
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  imgUrl?: string | null;
+}
