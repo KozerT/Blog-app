@@ -1,8 +1,8 @@
 import React from "react";
 
-// import { Link } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "./ui/Card";
 import { blogApi } from "../api/blogApi";
+import { Link } from "react-router-dom";
 
 interface BlogPostCardProps {
   postId: number;
@@ -20,23 +20,21 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ postId }) => {
   const excerpt = post.content.slice(0, 150) + "..."; //
 
   return (
-    // <Link to={`/posts/${post.id}`}> ///  Blog POst page  as well -
-    //   {" "}
-    //   {/* Link to the detail page */}
-    <Card className="cursor-pointer hover:shadow-lg">
-      <div className="relative aspect-video">
-        <img
-          src={post.imgUrl ? post.imgUrl : defaultImage}
-          alt={post.title}
-          className="object-cover w-full h-full"
-        />
-      </div>
-      <CardHeader>
-        <CardTitle>{post.title}</CardTitle>
-        <p className="text-sm text-muted-foreground">{excerpt}</p>
-      </CardHeader>
-    </Card>
-    // </Link>
+    <Link to={`/posts/${post.id}`}>
+      <Card className="cursor-pointer hover:shadow-lg">
+        <div className="relative aspect-video">
+          <img
+            src={post.imgUrl ? post.imgUrl : defaultImage}
+            alt={post.title}
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <CardHeader>
+          <CardTitle>{post.title}</CardTitle>
+          <p className="text-sm text-muted-foreground">{excerpt}</p>
+        </CardHeader>
+      </Card>
+    </Link>
   );
 };
 
