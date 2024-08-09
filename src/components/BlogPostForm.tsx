@@ -14,22 +14,43 @@ import {
 import { useBlog } from "../context/BlogContext";
 import { blogPostSchema } from "../lib/utils";
 import { Input } from "./ui/Input";
-import { Button } from "./ui/Button";
-import { Textarea } from "./ui/Textarea";
+import {
+  BtnAlignCenter,
+  Button,
+  BtnAlignLeft,
+  BtnAlignRight,
+  BtnAlignJustify,
+  BtnUnderline
+} from "./ui/Button";
 import { BlogPost } from "../types/models";
+import {
+  BtnBold,
+  BtnItalic,
+  Editor,
+  EditorProvider,
+  Toolbar
+} from "react-simple-wysiwyg";
+import { useState } from "react";
 
 interface BlogPostFormProps {
   post?: BlogPost;
 }
 
 const BlogPostForm: React.FC<BlogPostFormProps> = ({ post }) => {
+  const [content, setContent] = useState(post?.content || "");
   const { createPost, updatePost } = useBlog();
   const navigate = useNavigate();
   const { postId } = useParams();
   const isEditing = !!postId;
 
+  const updatedBlogPostSchema = blogPostSchema.extend({
+    content: z
+      .string()
+      .min(150, { message: "Content must be at least 150 characters" })
+  });
+
   const form = useForm<z.infer<typeof blogPostSchema>>({
-    resolver: zodResolver(blogPostSchema),
+    resolver: zodResolver(updatedBlogPostSchema),
     defaultValues: {
       id: post?.id || Date.now(),
       title: post?.title || "",
@@ -42,6 +63,7 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({ post }) => {
   const onSubmit = async (values: z.infer<typeof blogPostSchema>) => {
     const postData = {
       ...values,
+      content,
       imgUrl: values.imgUrl ? values.imgUrl : undefined,
       createdAt: new Date().toISOString()
     };
@@ -82,9 +104,29 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({ post }) => {
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <Textarea placeholder="Enter content" {...field} />
+                <EditorProvider>
+                  <Editor
+                    value={content}
+                    onChange={(e) => {
+                      setContent(e.target.value);
+                      field.onChange(e);
+                    }}
+                  >
+                    <Toolbar>
+                      <BtnBold />
+                      <BtnItalic />
+                      <BtnUnderline />
+                      <BtnAlignLeft />
+                      <BtnAlignCenter />
+                      <BtnAlignRight />
+                      <BtnAlignJustify />
+                    </Toolbar>
+                  </Editor>
+                </EditorProvider>
               </FormControl>
-              <FormDescription>The content of your blog post</FormDescription>
+              <FormDescription>
+                The content of your blog post (minimum 150 characters)
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

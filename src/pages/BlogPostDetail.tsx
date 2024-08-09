@@ -68,13 +68,13 @@ const BlogPostDetail: React.FC = () => {
             />
           </LazyLoad>
           <section className="leading-8 tracking-wide ">
-            <p>{post.content}</p>
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </section>
         </CardContent>
         <CardFooter>
           <Button
             variant="ghost"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
             className="text-muted-foreground"
           >
             Previous Page

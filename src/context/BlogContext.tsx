@@ -28,15 +28,6 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setFilteredPosts(fetchedPosts);
   }, []);
 
-  // useEffect(() => {
-  //   if (searchQuery) {
-  //     const filtered = blogApi.searchPosts(searchQuery);
-  //     setFilteredPosts(filtered);
-  //   } else {
-  //     setFilteredPosts(posts);
-  //   }
-  // }, [searchQuery, posts]);
-
   const handleSearch = () => {
     if (searchQuery) {
       const filtered = blogApi.searchPosts(searchQuery);

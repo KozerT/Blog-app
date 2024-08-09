@@ -5,6 +5,7 @@ import { blogApi } from "../api/blogApi";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/Button";
 import LazyLoad from "react-lazyload";
+import { getPlainTextExcerpt } from "../lib/utils";
 
 interface BlogPostCardProps {
   postId: number;
@@ -19,7 +20,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ postId }) => {
     return null;
   }
 
-  const excerpt = post.content.slice(0, 150) + "..."; //
+  const plainText = getPlainTextExcerpt(post.content);
 
   return (
     <Link to={`/posts/${post.id}`}>
@@ -41,7 +42,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ postId }) => {
         <CardHeader className="flex-1 text-wrap">
           <CardTitle className="min-h-20 ">{post.title}</CardTitle>
           <p className="text-sm text-muted-foreground line-clamp-4">
-            {excerpt}
+            {plainText}
           </p>
         </CardHeader>
         <CardFooter className="self-end mt-4">
