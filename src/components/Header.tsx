@@ -8,7 +8,7 @@ import { Search } from "lucide-react";
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { searchQuery, setSearchQuery } = useBlog();
+  const { searchQuery, setSearchQuery, handleSearch } = useBlog();
 
   const showSearch = location.pathname === "/";
   const showCreatePost = location.pathname === "/create-post";
@@ -22,12 +22,12 @@ const Header: React.FC = () => {
     }
   }, [showSearch, setSearchQuery]);
 
-  const handleSearch = () => {
-    if (showSearch) {
-      localStorage.setItem("searchQuery", searchQuery);
-      navigate("/");
-    }
-  };
+  // const handleSearch = () => {
+  //   if (showSearch) {
+  //     localStorage.setItem("searchQuery", searchQuery);
+  //     navigate("/");
+  //   }
+  // };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
               onClick={handleSearch}
               className="absolute inset-y-0 left-0 flex items-center rounded-r-none "
             >
-              <Search className="flex w-4 h-4 " />
+              <Search className="flex w-4 h-4" />
             </Button>
           </div>
         )}

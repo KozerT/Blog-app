@@ -36,11 +36,17 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsPerPage = 6 }) => {
 
   return (
     <LayoutWrapper>
-      <div className="grid grid-cols-1 gap-8 mb-24 md:grid-cols-2 lg:grid-cols-3">
-        {paginatedPosts.map((post) => (
-          <BlogPostCard key={post.id} postId={post.id} />
-        ))}
-      </div>
+      {paginatedPosts.length > 0 ? (
+        <div className="grid grid-cols-1 gap-8 mb-24 md:grid-cols-2 lg:grid-cols-3">
+          {paginatedPosts.map((post) => (
+            <BlogPostCard key={post.id} postId={post.id} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-gray-500">
+          No results match that query
+        </div>
+      )}
       {totalPages > 1 && (
         <Pagination aria-label="Pagination">
           <PaginationContent>

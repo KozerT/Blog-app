@@ -10,6 +10,7 @@ interface BlogContextType {
   filteredPosts: BlogPost[];
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  handleSearch: () => void;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
@@ -27,14 +28,23 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setFilteredPosts(fetchedPosts);
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (searchQuery) {
+  //     const filtered = blogApi.searchPosts(searchQuery);
+  //     setFilteredPosts(filtered);
+  //   } else {
+  //     setFilteredPosts(posts);
+  //   }
+  // }, [searchQuery, posts]);
+
+  const handleSearch = () => {
     if (searchQuery) {
       const filtered = blogApi.searchPosts(searchQuery);
       setFilteredPosts(filtered);
     } else {
       setFilteredPosts(posts);
     }
-  }, [searchQuery, posts]);
+  };
 
   const createPost = (post: Omit<BlogPost, "id">): BlogPost => {
     const newPost = blogApi.createPost({
@@ -69,7 +79,8 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
         deletePost,
         filteredPosts,
         searchQuery,
-        setSearchQuery
+        setSearchQuery,
+        handleSearch
       }}
     >
       {children}
