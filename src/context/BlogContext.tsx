@@ -4,7 +4,7 @@ import { BlogPost } from "../types/models";
 
 interface BlogContextType {
   posts: BlogPost[];
-  createPost: (post: Omit<BlogPost, "id">) => void;
+  createPost: (post: Omit<BlogPost, "id">) => BlogPost;
   updatePost: (id: number, post: BlogPost) => void;
   deletePost: (id: number) => void;
 }
@@ -21,9 +21,10 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setPosts(fetchedPosts);
   }, []);
 
-  const createPost = (post: Omit<BlogPost, "id">) => {
+  const createPost = (post: Omit<BlogPost, "id">): BlogPost => {
     const newPost = blogApi.createPost(post);
     setPosts((prevPosts) => [...prevPosts, newPost]);
+    return newPost;
   };
 
   const updatePost = (id: number, updatedPost: BlogPost) => {

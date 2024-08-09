@@ -12,6 +12,7 @@ import { formatDate } from "../lib/utils";
 import { defaultImage } from "../components/BlogPostCard";
 import { Button } from "../components/ui/Button";
 import { useNavigate } from "react-router-dom";
+import LazyLoad from "react-lazyload";
 
 const BlogPostDetail: React.FC = () => {
   const { postId } = useParams();
@@ -26,13 +27,20 @@ const BlogPostDetail: React.FC = () => {
       </LayoutWrapper>
     );
   }
+
+  const handleEdit = () => {
+    navigate(`/edit-post/${postId}`);
+  };
+
   return (
     <LayoutWrapper>
       <Card className="prose border-0 shadow-none lg:prose-xl">
         <CardHeader>
           <hr className="mb-2" />
           <div className="flex justify-end gap-6">
-            <Button variant="outline">Edit Post</Button>
+            <Button variant="outline" onClick={handleEdit}>
+              Edit Post
+            </Button>
             <Button variant="secondary">Delete</Button>
           </div>
           <CardTitle className="text-4xl ">{post.title}</CardTitle>
@@ -41,12 +49,17 @@ const BlogPostDetail: React.FC = () => {
           </p>
         </CardHeader>
         <CardContent>
-          <img
-            src={post.imgUrl ? post.imgUrl : defaultImage}
-            alt={post.title}
-            className="float-left object-cover w-full max-w-xs mb-4 mr-6 rounded-md sm:max-w-sm "
-          />
-
+          <LazyLoad
+            height={200}
+            offset={100}
+            placeholder={<div>Loading...</div>}
+          >
+            <img
+              src={post.imgUrl ? post.imgUrl : defaultImage}
+              alt={post.title}
+              className="float-left object-cover w-full h-full max-w-xs mb-4 mr-6 rounded-md sm:max-w-sm "
+            />
+          </LazyLoad>
           <section className="leading-8 tracking-wide ">
             <p>{post.content}</p>
           </section>

@@ -14,6 +14,5 @@
     "components": "@/components",
     "utils": "@/src/lib/utils",
     "styles": "@styles"
-  
   }
 }

@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BlogPostDetail from "./pages/BlogPostDetail";
 import { BlogPostList } from "./pages/BlogPostList";
+import NewBlogPostPage from "./pages/NewBlogPost";
+import EditBlogPostPage from "./pages/EditBlogPost";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: "/posts/:postId",
         element: <BlogPostDetail />
+      },
+      {
+        path: "/create-post",
+        element: <NewBlogPostPage />
+      },
+      {
+        path: "/edit-post/:postId",
+        element: <EditBlogPostPage />
       }
     ]
   }

@@ -4,6 +4,7 @@ import { Card, CardFooter, CardHeader, CardTitle } from "./ui/Card";
 import { blogApi } from "../api/blogApi";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/Button";
+import LazyLoad from "react-lazyload";
 
 interface BlogPostCardProps {
   postId: number;
@@ -24,11 +25,17 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ postId }) => {
     <Link to={`/posts/${post.id}`}>
       <Card className="flex flex-col cursor-pointer hover:shadow-lg">
         <div className="aspect-video">
-          <img
-            src={post.imgUrl ? post.imgUrl : defaultImage}
-            alt={post.title}
-            className="object-cover w-full h-full"
-          />
+          <LazyLoad
+            height={200}
+            offset={100}
+            placeholder={<div>Loading...</div>}
+          >
+            <img
+              src={post.imgUrl ? post.imgUrl : defaultImage}
+              alt={post.title}
+              className="object-cover w-full h-full"
+            />
+          </LazyLoad>
         </div>
 
         <CardHeader className="flex-1 text-wrap">

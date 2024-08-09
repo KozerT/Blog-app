@@ -9,6 +9,7 @@ const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const showSearch = location.pathname === "/";
+  const showCreatePost = location.pathname === "/create-post";
 
   useEffect(() => {
     if (showSearch) {
@@ -48,13 +49,15 @@ const Header: React.FC = () => {
           />
         )}
       </div>
-      <Button
-        variant="default"
-        size="sm"
-        onClick={() => navigate("/create-post")}
-      >
-        Create Post
-      </Button>
+      {!showCreatePost && (
+        <Button
+          variant="default"
+          size="sm"
+          onClick={() => navigate("/create-post")}
+        >
+          Create Post
+        </Button>
+      )}
     </header>
   );
 };
