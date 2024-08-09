@@ -14,7 +14,6 @@ import {
 import { useBlog } from "../context/BlogContext";
 import { blogPostSchema } from "../lib/utils";
 import { Input } from "./ui/Input";
-
 import { Button } from "./ui/Button";
 import { Textarea } from "./ui/Textarea";
 import { BlogPost } from "../types/models";
@@ -41,15 +40,16 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({ post }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof blogPostSchema>) => {
+    const postData = {
+      ...values,
+      imgUrl: values.imgUrl ? values.imgUrl : undefined,
+      createdAt: new Date().toISOString()
+    };
     if (isEditing) {
-      updatePost(Number(postId), values);
+      updatePost(Number(postId), postData);
       navigate(`/posts/${postId}`);
     } else {
-      const newPost = createPost({
-        ...values,
-        createdAt: new Date().toISOString(),
-        imgUrl: values.imgUrl || null
-      });
+      const newPost = createPost(postData);
       navigate(`/posts/${newPost.id}`);
     }
   };

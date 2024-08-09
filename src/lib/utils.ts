@@ -15,6 +15,6 @@ export const blogPostSchema = z.object({
   id: z.number(),
   title: z.string().min(1, { message: "Title is required" }),
   content: z.string().min(1, { message: "Content is required" }),
-  imgUrl: z.string().url().optional(),
+  imgUrl: z.string().url({ message: "Invalid URL format" }).optional(),
   createdAt: z.string()
 });

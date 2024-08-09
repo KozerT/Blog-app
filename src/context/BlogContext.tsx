@@ -22,7 +22,10 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const createPost = (post: Omit<BlogPost, "id">): BlogPost => {
-    const newPost = blogApi.createPost(post);
+    const newPost = blogApi.createPost({
+      ...post,
+      imgUrl: post.imgUrl || null
+    });
     setPosts((prevPosts) => [...prevPosts, newPost]);
     return newPost;
   };

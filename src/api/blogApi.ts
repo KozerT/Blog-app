@@ -2,7 +2,7 @@ import seedData from "../data/blog-app-seed.json";
 import { BlogPost } from "../types/models";
 import { getFromStorage, saveToStorage } from "./storage";
 
-const STORAGE_KEY = "blogPosts";
+export const STORAGE_KEY = "blogPosts";
 
 export const blogApi = {
   getPosts: (): BlogPost[] => getFromStorage(STORAGE_KEY, seedData),

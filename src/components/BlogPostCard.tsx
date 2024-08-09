@@ -31,7 +31,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ postId }) => {
             placeholder={<div>Loading...</div>}
           >
             <img
-              src={post.imgUrl ? post.imgUrl : defaultImage}
+              src={post.imgUrl || defaultImage}
               alt={post.title}
               className="object-cover w-full h-full"
             />

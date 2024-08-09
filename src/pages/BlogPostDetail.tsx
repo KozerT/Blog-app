@@ -14,9 +14,11 @@ import { Button } from "../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 
+import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
+
 const BlogPostDetail: React.FC = () => {
   const { postId } = useParams();
-  const { posts } = useBlog();
+  const { posts, deletePost } = useBlog();
   const navigate = useNavigate();
   const post = posts.find((p) => p.id === Number(postId));
 
@@ -32,6 +34,11 @@ const BlogPostDetail: React.FC = () => {
     navigate(`/edit-post/${postId}`);
   };
 
+  const handleDelete = () => {
+    deletePost(Number(postId));
+    navigate("/");
+  };
+
   return (
     <LayoutWrapper>
       <Card className="prose border-0 shadow-none lg:prose-xl">
@@ -41,7 +48,7 @@ const BlogPostDetail: React.FC = () => {
             <Button variant="outline" onClick={handleEdit}>
               Edit Post
             </Button>
-            <Button variant="secondary">Delete</Button>
+            <DeleteConfirmationModal onConfirm={handleDelete} />
           </div>
           <CardTitle className="text-4xl ">{post.title}</CardTitle>
           <p className="mb-2 italic text-muted-foreground">
@@ -55,9 +62,9 @@ const BlogPostDetail: React.FC = () => {
             placeholder={<div>Loading...</div>}
           >
             <img
-              src={post.imgUrl ? post.imgUrl : defaultImage}
+              src={post.imgUrl || defaultImage}
               alt={post.title}
-              className="float-left object-cover w-full h-full max-w-xs mb-4 mr-6 rounded-md sm:max-w-sm "
+              className="float-left object-cover w-full h-full max-w-xs mb-4 mr-6 rounded-md sm:max-w-sm"
             />
           </LazyLoad>
           <section className="leading-8 tracking-wide ">
