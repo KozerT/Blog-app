@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Input } from "./ui/Input";
 import { Button } from "./ui/Button";
+import { useBlog } from "../context/BlogContext";
+import { Search } from "lucide-react";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const { searchQuery, setSearchQuery } = useBlog();
 
   const showSearch = location.pathname === "/";
   const showCreatePost = location.pathname === "/create-post";
 
   useEffect(() => {
     if (showSearch) {
-      localStorage.setItem("searchQuery", searchQuery);
+      const storedSearchQuery = localStorage.getItem("searchQuery");
+      if (storedSearchQuery) {
+        setSearchQuery(storedSearchQuery);
+      }
     }
-  }, [searchQuery, showSearch]);
+  }, [showSearch, setSearchQuery]);
 
   const handleSearch = () => {
     if (showSearch) {
@@ -39,14 +44,24 @@ const Header: React.FC = () => {
       </Link>
       <div className="flex-1 mx-4">
         {showSearch && (
-          <Input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-            className="px-4 py-2 border rounded-md md:w-4/12"
-          />
+          <div className="relative ">
+            <Input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyPress}
+              className="px-4 py-2 pl-12 border rounded-md md:w-4/12"
+            />
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={handleSearch}
+              className="absolute inset-y-0 left-0 flex items-center rounded-r-none "
+            >
+              <Search className="flex w-4 h-4 " />
+            </Button>
+          </div>
         )}
       </div>
       {!showCreatePost && (

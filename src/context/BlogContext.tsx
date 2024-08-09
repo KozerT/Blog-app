@@ -7,6 +7,9 @@ interface BlogContextType {
   createPost: (post: Omit<BlogPost, "id">) => BlogPost;
   updatePost: (id: number, post: BlogPost) => void;
   deletePost: (id: number) => void;
+  filteredPosts: BlogPost[];
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
@@ -15,11 +18,23 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchedPosts = blogApi.getPosts();
     setPosts(fetchedPosts);
+    setFilteredPosts(fetchedPosts);
   }, []);
+
+  useEffect(() => {
+    if (searchQuery) {
+      const filtered = blogApi.searchPosts(searchQuery);
+      setFilteredPosts(filtered);
+    } else {
+      setFilteredPosts(posts);
+    }
+  }, [searchQuery, posts]);
 
   const createPost = (post: Omit<BlogPost, "id">): BlogPost => {
     const newPost = blogApi.createPost({
@@ -46,7 +61,17 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
   return (
-    <BlogContext.Provider value={{ posts, createPost, updatePost, deletePost }}>
+    <BlogContext.Provider
+      value={{
+        posts,
+        createPost,
+        updatePost,
+        deletePost,
+        filteredPosts,
+        searchQuery,
+        setSearchQuery
+      }}
+    >
       {children}
     </BlogContext.Provider>
   );

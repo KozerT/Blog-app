@@ -34,5 +34,13 @@ export const blogApi = {
     if (posts.length === updatedPosts.length) return false;
     saveToStorage(STORAGE_KEY, updatedPosts);
     return true;
+  },
+
+  searchPosts: (query: string): BlogPost[] => {
+    const posts = blogApi.getPosts();
+    const lowercasedQuery = query.toLowerCase();
+    return posts.filter((post) =>
+      post.title.toLowerCase().includes(lowercasedQuery)
+    );
   }
 };

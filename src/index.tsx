@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BlogPostDetail from "./pages/BlogPostDetail";
-import { BlogPostList } from "./pages/BlogPostList";
+import BlogPostList from "./pages/BlogPostList";
 import NewBlogPostPage from "./pages/NewBlogPost";
 import EditBlogPostPage from "./pages/EditBlogPost";
 
