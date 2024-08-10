@@ -114,14 +114,14 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 - **Blog Post List Page**
 
-  - ![Blog Post List]([])
+  - ![Blog Post List]([<img width="369" alt="Screenshot 2024-08-10 at 11 39 12 2" src="https://github.com/user-attachments/assets/6885c3ec-43f2-4207-bbc3-5a7129fe210a">])
 
 - **Blog Post Detail Page**
 
-  - ![Blog Post Detail]([])
+  - ![Blog Post Detail]([<img width="353" alt="Screenshot 2024-08-10 at 11 41 00" src="https://github.com/user-attachments/assets/28171bd4-0bd9-45f3-bc30-621bfbd6adbd">])
 
 - **New/Edit Blog Post Page**
-  - ![New/Edit Post]([])
+  - ![New/Edit Post]([<img width="332" alt="Screenshot 2024-08-10 at 11 40 15" src="https://github.com/user-attachments/assets/b9cfa462-87a7-4888-958f-941ef9680a52">])
 
 ## Learn More
 
