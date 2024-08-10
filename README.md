@@ -2,6 +2,10 @@
 
 A simple blog application built with React, TypeScript, and Shadcn/UI. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Deployment
+
+This project is deployed on [Vercel](https://vercel.com/). Check it out live [here](https://blog-app-one-eosin.vercel.app)!
+
 ## Features
 
 - View a list of blog posts with pagination and search functionality.
@@ -121,7 +125,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 <img width="353" alt="Screenshot 2024-08-10 at 11 41 00" src="https://github.com/user-attachments/assets/28171bd4-0bd9-45f3-bc30-621bfbd6adbd">
 
 - **New/Edit Blog Post Page**
-  
+
 <img width="332" alt="Screenshot 2024-08-10 at 11 40 15" src="https://github.com/user-attachments/assets/b9cfa462-87a7-4888-958f-941ef9680a52">
 
 - **Delete Confirmation Modal**
