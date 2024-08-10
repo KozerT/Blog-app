@@ -10,7 +10,7 @@ import {
 import { LayoutWrapper } from "../components/LayoutWrapper";
 import { formatDate } from "../lib/utils";
 import { defaultImage } from "../components/BlogPostCard";
-import { Button } from "../components/ui/Button.tsx";
+import { Button } from "../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 
