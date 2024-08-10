@@ -37,7 +37,7 @@ A simple blog application built with React, TypeScript, and Shadcn/UI. This proj
 1.  **Clone the repository:**
 
     ```bash
-    git clone [invalid URL removed]
+    git clone [URL]
     ```
 
 2.  **Navigate to the project directory:**
