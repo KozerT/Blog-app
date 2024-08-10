@@ -21,7 +21,7 @@ import {
   BtnAlignRight,
   BtnAlignJustify,
   BtnUnderline
-} from "./ui/Button";
+} from "./ui/Button.tsx";
 import { BlogPost } from "../types/models";
 import {
   BtnBold,
