@@ -14,12 +14,13 @@ import {
 import { useBlog } from "../context/BlogContext";
 import { blogPostSchema } from "../lib/utils";
 import { Input } from "./ui/Input";
-import Button, {
+import {
   BtnAlignCenter,
   BtnAlignLeft,
   BtnAlignRight,
   BtnAlignJustify,
-  BtnUnderline
+  BtnUnderline,
+  Button
 } from "./ui/Button";
 import { BlogPost } from "../types/models";
 import {

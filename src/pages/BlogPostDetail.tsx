@@ -13,7 +13,7 @@ import { defaultImage } from "../components/BlogPostCard";
 import { useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
-import Button from "../components/ui/Button";
+import { Button } from "../components/ui/Button";
 
 const BlogPostDetail: React.FC = () => {
   const { postId } = useParams();

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Input } from "./ui/Input";
-import Button from "./ui/Button";
+import { Button } from "./ui/Button";
 import { useBlog } from "../context/BlogContext";
 import { Search } from "lucide-react";
 
