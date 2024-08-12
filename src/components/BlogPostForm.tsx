@@ -14,9 +14,8 @@ import {
 import { useBlog } from "../context/BlogContext";
 import { blogPostSchema } from "../lib/utils";
 import { Input } from "./ui/Input";
-import {
+import Button, {
   BtnAlignCenter,
-  Button,
   BtnAlignLeft,
   BtnAlignRight,
   BtnAlignJustify,

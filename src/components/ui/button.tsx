@@ -62,7 +62,6 @@ const BtnUnderline = createButton("Underline", "U", "underline");
 export default Button;
 
 export {
-  Button,
   buttonVariants,
   BtnAlignCenter,
   BtnAlignLeft,
