@@ -59,6 +59,9 @@ export const BlogContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const deleted = blogApi.deletePost(id);
     if (deleted) {
       setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+      setFilteredPosts((prevFilteredPosts) =>
+        prevFilteredPosts.filter((post) => post.id !== id)
+      );
     }
   };
   return (
