@@ -9,7 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from "./ui/AlertDialog";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/ButtonUi";
 
 interface DeleteConfirmationModalProps {
   onConfirm: () => void;

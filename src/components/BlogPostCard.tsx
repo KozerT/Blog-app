@@ -5,7 +5,7 @@ import { blogApi } from "../api/blogApi";
 import { Link } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 import { getPlainTextExcerpt } from "../lib/utils";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/ButtonUi";
 
 interface BlogPostCardProps {
   postId: number;

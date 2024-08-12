@@ -21,7 +21,7 @@ import {
   BtnAlignJustify,
   BtnUnderline,
   Button
-} from "./ui/Button";
+} from "./ui/ButtonUi";
 import { BlogPost } from "../types/models";
 import {
   BtnBold,
