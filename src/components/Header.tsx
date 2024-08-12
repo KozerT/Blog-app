@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Input } from "./ui/Input";
-import { Button } from "./ui/Button";
+import Button from "./ui/Button";
 import { useBlog } from "../context/BlogContext";
 import { Search } from "lucide-react";
 
@@ -21,13 +21,6 @@ const Header: React.FC = () => {
       }
     }
   }, [showSearch, setSearchQuery]);
-
-  // const handleSearch = () => {
-  //   if (showSearch) {
-  //     localStorage.setItem("searchQuery", searchQuery);
-  //     navigate("/");
-  //   }
-  // };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

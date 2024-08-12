@@ -26,7 +26,14 @@ export default [
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
       "react/no-unescaped-entities": ["error"],
-      "react/jsx-no-duplicate-props": ["error"]
+      "react/jsx-no-duplicate-props": ["error"],
+      "no-warning-comments": [
+        "error",
+        {
+          terms: ["todo", "fixme", "any other term"],
+          location: "anywhere"
+        }
+      ]
     }
   },
   {

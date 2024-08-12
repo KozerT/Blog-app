@@ -59,6 +59,8 @@ const BtnAlignRight = createButton("Align right", "◨", "justifyRight");
 const BtnAlignJustify = createButton("Justify", " ≡", "justifyFull");
 const BtnUnderline = createButton("Underline", "U", "underline");
 
+export default Button;
+
 export {
   Button,
   buttonVariants,

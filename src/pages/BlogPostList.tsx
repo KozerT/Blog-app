@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import BlogPostCard from "../components/BlogPostCard";
 import { LayoutWrapper } from "../components/LayoutWrapper";
 import {
@@ -27,6 +28,12 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsPerPage = 6 }) => {
     getVisiblePages
   } = usePagination(filteredPosts.length, postsPerPage);
 
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      goToPage(totalPages);
+    }
+  }, [filteredPosts, currentPage, totalPages, goToPage]);
+
   const paginatedPosts = filteredPosts.slice(
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage
@@ -43,9 +50,11 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsPerPage = 6 }) => {
           ))}
         </div>
       ) : (
-        <div className="text-center text-gray-500">
-          No results match that query
-        </div>
+        <LayoutWrapper>
+          <div className="text-center text-gray-500">
+            No results match that query
+          </div>
+        </LayoutWrapper>
       )}
       {totalPages > 1 && (
         <Pagination aria-label="Pagination">
