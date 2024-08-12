@@ -10,11 +10,11 @@ import {
 import { LayoutWrapper } from "../components/LayoutWrapper";
 import { formatDate } from "../lib/utils";
 import { defaultImage } from "../components/BlogPostCard";
-import { Button } from "../components/ui/Button";
+
 import { useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
-
 import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
+import Button from "../components/ui/Button";
 
 const BlogPostDetail: React.FC = () => {
   const { postId } = useParams();
