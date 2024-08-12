@@ -30,7 +30,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsPerPage = 6 }) => {
 
   useEffect(() => {
     if (currentPage > totalPages) {
-      goToPage(totalPages);
+      goToPage(1);
     }
   }, [filteredPosts, currentPage, totalPages, goToPage]);
 
