@@ -1,42 +1,38 @@
-import React from "react";
+import React from "react"
 
-import { Card, CardFooter, CardHeader, CardTitle } from "./ui/Card";
-import { blogApi } from "../api/blogApi";
-import { Link } from "react-router-dom";
-import LazyLoad from "react-lazyload";
-import { getPlainTextExcerpt } from "../lib/utils";
-import { Button } from "./ui/ButtonUi";
+import { Link } from "react-router-dom"
+import { blogApi } from "../api/blogApi"
+import { getPlainTextExcerpt } from "../lib/utils"
+import { Button } from "./ui/ButtonUi"
+import { Card, CardFooter, CardHeader, CardTitle } from "./ui/Card"
 
 interface BlogPostCardProps {
-  postId: number;
+  postId: number
 }
 
-export const defaultImage = "https://picsum.photos/seed/21/300/200";
+export const defaultImage =
+  "https://static.photos/abstract/300x200/21.webp?lock=21"
 
 const BlogPostCard: React.FC<BlogPostCardProps> = ({ postId }) => {
-  const post = blogApi.getPostById(postId);
+  const post = blogApi.getPostById(postId)
 
   if (!post) {
-    return null;
+    return null
   }
 
-  const plainText = getPlainTextExcerpt(post.content);
+  const plainText = getPlainTextExcerpt(post.content)
 
   return (
     <Link to={`/posts/${post.id}`}>
       <Card className="flex flex-col cursor-pointer hover:shadow-lg">
         <div className="aspect-video">
-          <LazyLoad
-            height={200}
-            offset={100}
-            placeholder={<div>Loading...</div>}
-          >
-            <img
-              src={post.imgUrl || defaultImage}
-              alt={post.title}
-              className="object-cover w-full h-full"
-            />
-          </LazyLoad>
+          <img
+            src={post.imgUrl || defaultImage}
+            alt={post.title}
+            loading="lazy"
+            decoding="async"
+            className="object-cover w-full h-full"
+          />
         </div>
 
         <CardHeader className="flex-1 text-wrap">
@@ -50,7 +46,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ postId }) => {
         </CardFooter>
       </Card>
     </Link>
-  );
-};
+  )
+}
 
-export default BlogPostCard;
+export default BlogPostCard

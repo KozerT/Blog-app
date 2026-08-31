@@ -1,42 +1,40 @@
-import { useParams } from "react-router-dom";
-import { useBlog } from "../context/BlogContext";
+import { useNavigate, useParams } from "react-router-dom"
+import { defaultImage } from "../components/BlogPostCard"
+import DeleteConfirmationModal from "../components/DeleteConfirmationModal"
+import { LayoutWrapper } from "../components/LayoutWrapper"
+import { Button } from "../components/ui/ButtonUi"
 import {
   Card,
+  CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardContent,
-  CardFooter
-} from "../components/ui/Card";
-import { LayoutWrapper } from "../components/LayoutWrapper";
-import { formatDate } from "../lib/utils";
-import { defaultImage } from "../components/BlogPostCard";
-import { useNavigate } from "react-router-dom";
-import LazyLoad from "react-lazyload";
-import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
-import { Button } from "../components/ui/ButtonUi";
+} from "../components/ui/Card"
+import { useBlog } from "../context/BlogContext"
+import { formatDate } from "../lib/utils"
 
 const BlogPostDetail: React.FC = () => {
-  const { postId } = useParams();
-  const { posts, deletePost } = useBlog();
-  const navigate = useNavigate();
-  const post = posts.find((p) => p.id === Number(postId));
+  const { postId } = useParams()
+  const { posts, deletePost } = useBlog()
+  const navigate = useNavigate()
+  const post = posts.find((p) => p.id === Number(postId))
 
   if (!post) {
     return (
       <LayoutWrapper>
         <p>Blog post not found</p>
       </LayoutWrapper>
-    );
+    )
   }
 
   const handleEdit = () => {
-    navigate(`/edit-post/${postId}`);
-  };
+    navigate(`/edit-post/${postId}`)
+  }
 
   const handleDelete = () => {
-    deletePost(Number(postId));
-    navigate("/");
-  };
+    deletePost(Number(postId))
+    navigate("/")
+  }
 
   return (
     <LayoutWrapper>
@@ -55,17 +53,13 @@ const BlogPostDetail: React.FC = () => {
           </p>
         </CardHeader>
         <CardContent>
-          <LazyLoad
-            height={200}
-            offset={100}
-            placeholder={<div>Loading...</div>}
-          >
-            <img
-              src={post.imgUrl || defaultImage}
-              alt={post.title}
-              className="float-left object-cover w-full h-full max-w-xs mb-4 mr-6 rounded-md sm:max-w-sm"
-            />
-          </LazyLoad>
+          <img
+            src={post.imgUrl || defaultImage}
+            alt={post.title}
+            loading="lazy"
+            decoding="async"
+            className="float-left object-cover w-full h-full max-w-xs mb-4 mr-6 rounded-md sm:max-w-sm"
+          />
           <section className="leading-8 tracking-wide ">
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </section>
@@ -81,7 +75,7 @@ const BlogPostDetail: React.FC = () => {
         </CardFooter>
       </Card>
     </LayoutWrapper>
-  );
-};
+  )
+}
 
-export default BlogPostDetail;
+export default BlogPostDetail
